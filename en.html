@@ -175,17 +175,24 @@
             document.getElementById('modal').style.display = 'flex';
         }
 
-        function validateAndStartShuffle() {
-            const input = document.getElementById('hashIdInput');
-            if (input.value.trim() === '') {
-                input.classList.add('error');
-                input.placeholder = 'Enter hash id';
-            } else {
-                input.classList.remove('error');
-                document.getElementById('diamond').style.display = 'none'; // Скрыть алмаз
-                startShuffle();
-            }
+       function validateAndStartShuffle() {
+        const input = document.getElementById('hashIdInput');
+        const hashId = input.value.trim();
+        
+        if (hashId.length === 0) {
+            input.classList.add('error');
+            input.placeholder = 'Enter hash id';
+        } else if (hashId.length !== 28) {
+            input.classList.add('error');
+            input.placeholder = 'Incorrect Hash ID';
+            input.value = ''; // Очистка поля ввода
+        } else {
+            input.classList.remove('error');
+            document.getElementById('diamond').style.display = 'none'; // Скрыть алмаз
+            startShuffle();
         }
+    }
+
 
 
         function startShuffle() {
